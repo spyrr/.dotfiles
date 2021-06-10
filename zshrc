@@ -20,3 +20,6 @@ function get_exploit() {
 	[ -f ${BASE}${1} ] && echo "copy ${BASE}${1} to ${2}" && cp ${BASE}${1} ${2} || echo "There is no ${BASE}${1}";
 }
 export TIME_ZONE='Asia/Seoul'
+export POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+
+alias lspy='ls -l ~/.py'
