@@ -12,10 +12,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/spyrr/.dotfiles/master/bin
 sh -c "$(wget -O- https://raw.githubusercontent.com/spyrr/.dotfiles/master/bin/install.sh)"
 ```
 
-# Test
-## Test on Ubuntu Docker Container
+# Dev env on Docker container
 ```bash
 git clone https://github.com/spyrr/.dotfiles
 cd .dotfiles
-docker build -t dotfiles -f Dockerfiles/ubuntu/Dockerfile .
+docker compose build
+docker run -it --name dev --hostname dev dev
 ```

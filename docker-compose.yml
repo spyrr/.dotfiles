@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  dev-base:
+    build:
+      context: Dockerfiles/base
+      dockerfile: dev.ubuntu.dockerfile
+    image: dev-base:latest
+
+  dev:
+    build:
+      context: Dockerfiles/ubuntu
+      dockerfile: dev.dockerfile
+    image: dev:latest
+    depends_on:
+      - dev-base
