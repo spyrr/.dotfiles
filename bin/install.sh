@@ -28,7 +28,7 @@ git clone --depth=1 https://github.com/spyrr/.dotfiles ~/.dotfiles ||  {
 	exit 1
 }
 
-# STEP 2: install oh-my-zsh
+# STEP 2: install oh-my-zsh and add custom zsh env
 sh -c "CHSH=${CHSH} $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || {
 	error "Failed to install oh-my-zsh"
 	exit 2
@@ -52,3 +52,17 @@ git clone https://github.com/gpakosz/.tmux.git || {
 }
 ln -s -f .tmux/.tmux.conf
 cp .tmux/.tmux.conf.local .
+
+# STEP 5: Link vimrc
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+command_exists nvim && {
+	mkdir ~/.config
+	ln -s ~/.dotfiles/nvim ~/.config/nvim
+
+	nvim -E -s -c "source ~/.config/nvim/init.vim" -c "PlugInstall" -c "qa"
+} || {
+	ln -s ~/.dotfiles/vimrc ~/.vimrc
+	vim -E -s -c "source ~/.vimrc" -c "PlugInstall" -c "qa"
+}
